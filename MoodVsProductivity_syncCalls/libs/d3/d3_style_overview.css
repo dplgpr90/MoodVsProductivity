@@ -1,0 +1,41 @@
+/* data table styles */
+#gridOverview { 
+  max-height: 200px; 
+  margin-bottom: 25px;
+  overflow: auto;
+  width: 1000px;
+  display: block;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#gridOverview .row, #gridOverview .header { 
+  clear: left; 
+  font-size: 12px; 
+  line-height: 18px; 
+  height: 18px; 
+  margin-left: 0px;
+}
+
+#gridOverview .row:nth-child(odd) { 
+  background: rgba(0,0,0,0.05);
+}
+
+#gridOverview .header { 
+  font-weight: bold; 
+}
+
+#gridOverview .cell { 
+  float: left; 
+  overflow: hidden; 
+  white-space: nowrap;
+  text-align: center; 
+  width: 100px; 
+  height: 18px; 
+}
+
+#gridOverview .col-0 {
+ width: 180px; 
+}

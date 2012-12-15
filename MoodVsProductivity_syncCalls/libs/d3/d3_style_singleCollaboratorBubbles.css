@@ -1,0 +1,15 @@
+#bubblesPlot {
+  font: 10px sans-serif;
+}
+
+#bubblesPlot .axis path,
+#bubblesPlot .axis line {
+  fill: none;
+  stroke-width: 2;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+#bubblesPlot svg{
+	background-image: url("../../img/grid.png");
+}

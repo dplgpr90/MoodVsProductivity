@@ -1,0 +1,353 @@
+/* INITIAL LAYOUT */
+div.startInputs {
+	margin-top: 20%;
+}
+
+div.startInputs input:not(#restriction), div.startInputs button {
+	display: block;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 20px;
+}
+
+div.startInputs button {
+	width: 400px;
+	height: 60px;
+}
+
+div.startInputs input:not(#restriction) {
+	width: 400px;
+	height: 40px;
+}
+
+div.startInputs div.restriction {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+#restriction {
+	margin-top: -2px;
+}
+
+div.startInputs div.restriction label {
+	display: inline;
+
+}
+
+#container, #topSeparator {
+	display: none;
+}
+
+#progressBar {
+	position: absolute;
+	display: none;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	width: 90%;
+	top: 50%;
+	height: 30px;
+	z-index: 20;
+}
+
+#progressBar span {
+	color: white;
+	font-weight: bold;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 5px;
+}
+
+.dark {
+	position: absolute;
+	z-index: 10;
+	width: 100%; 
+	height: 100%;
+	display: none;
+	top:0;
+	left: 0;
+	background-color: rgba(0,0,0,0.5);
+}
+
+/* INITIAL LAYOUT END */
+
+
+/* LAYOUT RESULT PAGE */
+div.resultInputs {
+	margin-top: 20px;
+}
+
+div.resultInputs input:not(#restriction), div.resultInputs button {
+	display: inline-block;
+	width: 200px;
+	height: 30px;
+	margin-left: 2%;
+}
+
+div.resultInputs button {
+	margin-top: -0.8%;
+	height: 37px;
+}
+
+div.resultInputs div.restriction {
+	display: initial;
+}
+
+#restriction {
+	margin-top: -2px;
+}
+
+div.resultInputs div.restriction label {
+	display: inline;
+
+}
+
+#topSeparator {
+	margin-left: 2%;
+	margin-right: 2%;
+	margin-top: 10px;
+	border-color: #08C;
+}
+
+.container-fluid {
+	padding-right: 2%;
+	padding-left: 2%;
+	margin-bottom: 75px;
+	/*display: none;*/
+}
+
+div.collaborators {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	height: 100%;
+}
+
+div.resultData {
+	background-color: #FFF;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	height: 100%;
+}
+
+body {
+	background-color: #EEE;	
+}
+
+/* COLLABORATORS LIST */
+.bs-docs-sidenav {	
+	position: relative;
+	background-color: white;
+	width: 100%;
+	padding: 0px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, .065);
+	-moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .065);
+}
+
+.bs-docs-sidenav > li:first-child > a {
+	-webkit-border-radius: 6px 6px 0 0;
+	-moz-border-radius: 6px 6px 0 0;
+	border-radius: 6px 6px 0 0;
+}
+
+.bs-docs-sidenav > li > a {
+	display: block;
+	margin: 0 0 -1px;
+	padding: 8px 14px;
+	font-size: 12px;
+	border: 1px solid #E5E5E5;
+}
+
+.bs-docs-sidenav .icon-chevron-right {
+	float: right;
+	margin-top: 2px;
+	margin-right: -6px;
+	opacity: .25;
+}
+
+li.overviewCollaborator a {
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	padding: 10px;
+}
+
+.githubIcon{
+	width: 15px;
+	float: right;
+	margin-left: 5px;
+}
+
+.twitterIcon{
+	width: 15px;
+	float: right;
+}
+/* COLLABOLATORS LIST END */
+
+/* PLOTS */
+#results {	
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, .065);
+	-moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .065);
+}
+
+#singleCollaboratorPlot{
+	display: none;
+}
+
+#plotOverview{
+	height: 200px;
+}
+
+#plotOptions{
+	display: block;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 20px;
+	height: 120px;
+}
+
+#plotMoodOptionsLeft{
+	float: left;
+	margin-left: 100px;
+}
+
+#plotMoodOptionsLeft span{
+	display: block;
+	margin-bottom: 10px;
+	color: #08C;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#plotMoodOptionsRight{
+	float: right;
+	margin-right: 150px;
+}
+
+#plotMoodOptionsRight span{
+	display: block;
+	margin-bottom: 10px;
+	color: #08C;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#plotOptionsTimeGranularity, #bubbleOptionsTimeGranularity{
+	margin-left: 15%;
+	margin-right: 20%;
+}
+
+#plotOptionsTimeGranularity label, #bubbleOptionsTimeGranularity label{
+	color: #727272;	
+	float: left;
+	margin-left: 50px;
+}
+
+#plotOptionsTimeGranularity span, #bubbleOptionsTimeGranularity span {
+	display: block;
+	margin-top: 50px;
+	margin-bottom: 10px;
+	color: #08C;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#energyPolarity{
+	float: left;
+}
+
+#moodComponents{
+	margin-left: 100px;
+}
+
+#plotSeparator {
+	margin-left: 2%;
+	margin-right: 2%;
+	margin-top: 200px;
+	margin-bottom: 50px;
+	border-color: #08C;
+}
+
+h3 {	
+	color: #08C;
+	font-size: 24px;
+	font-weight: bold;
+	margin-left: 5%;
+}
+
+#plot label, #bubbles label {	
+	font-weight: bold;
+}
+
+#bubbles {
+	height: 750px;
+}
+
+#bubblesPlot{
+	position: relative;
+	width: 90%;
+	overflow: auto;
+	display: block;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 70px;
+}
+/* PLOTS END */
+/* LAYOUT RESULT PAGE END */
+
+/* ALERTS */
+#collaboratorAlert .alert {
+	margin-bottom: 0;
+}
+
+#collaboratorAlert {
+	display: none;
+}
+
+#noResultAlert {
+	position: absolute;
+	width: 30%;
+	display: block;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -400px;
+}
+
+#noMoodOverviewAlert{
+	position: relative;
+	height: 0;
+	display: none;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#noProjectResultAlert div.alert, #noProjectCommitsAlert div.alert {
+	padding-top: 14px;
+	padding-bottom: 14px;
+	margin-top: 20%;
+	margin-left: 30%;
+	margin-right: 30%;
+}
+/* ALERTS END */

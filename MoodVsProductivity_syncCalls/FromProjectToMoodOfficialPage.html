@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+	<title>Mood VS Productivity</title>
+
+	<!-- jQuery -->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"/></script>
+	
+	<!-- Bootstrap (requires jQuery) -->
+    <link href="libs/bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
+    <link href="libs/bootstrap/css/bootstrap-responsive.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="libs/bootstrap/js/bootstrap.js"/></script>
+
+	<!-- OAuth -->
+	<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+    <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+    
+	<!-- d3 (used to draw plots)-->
+    <link href="libs/d3/d3_style_singleCollaborator.css" type="text/css" rel="stylesheet">	
+	<script src="http://d3js.org/d3.v3.js"></script>
+	<script type="text/javascript" src="libs/d3/d3_script_singleCollaborator.js"></script>
+	<link rel="stylesheet" type="text/css" href="libs/d3/d3.parcoords.css">
+	<link rel="stylesheet" type="text/css" href="libs/d3/d3_style_overview.css">
+	<script src="libs/d3/d3.v2.js"></script>
+	<script src="libs/d3/d3.parcoords.js"></script>
+	<script src="libs/d3/divgrid.js"></script>
+	<script src="libs/d3/d3.legend.js"></script>
+	<script src="libs/d3/d3_script_overview.js"></script>
+    <link href="libs/d3/d3_style_singleCollaboratorBubbles.css" type="text/css" rel="stylesheet">	
+	<script src="libs/d3/d3_script_singleCollaboratorBubbles.js"></script>
+
+	<!-- My components -->
+    <link href="css/style.css" type="text/css" rel="stylesheet">	
+    <script type="text/javascript" src="js/ScoringSystem.js"/></script>
+	<script type="text/javascript" src="js/FileHandler.js"/></script>
+	<script type="text/javascript" src="js/ActivityBubble.js"/></script>
+	<script type="text/javascript" src="js/TweetBubble.js"/></script>
+	<script type="text/javascript" src="js/ResultSlot.js"/></script>
+	<script type="text/javascript" src="js/Exceptions.js"/></script>
+	<script type="text/javascript" src="js/MoodVsProductivity.js"/></script>
+	<script type="text/javascript" src="js/MoodVsProductivityGraphics.js"/></script>
+	
+</head>
+<body>
+	<div class="startInputs">			
+		<input type="text" id="project" value="" placeholder="Project Name"/>
+		<input type="text" id="owner" value="" placeholder="Project Owner"/>
+		<div class="restriction">
+			<input type="checkbox" id="restriction" checked="checked"/>
+			<label for="restriction">Show only first 10 collaborators</label>
+		</div>
+		<button type="button" id="actionButton" class="btn btn-primary" data-toggle="button" onclick="javascript:onClickAnalyze();">ANALYZE</button>
+	</div>
+	<hr id="topSeparator">
+	<div id="progressBar">
+		<span>Loading..</span>
+		<div class="progress progress-striped active">
+			<div class="bar"></div>
+		</div>
+	</div>	
+	<div id="container" class="container-fluid">
+		 <div class="row-fluid">
+		 	<div class="span2 collaborators">
+		    	<!--Sidebar content-->
+		    	<ul id="collaboratorsList" class="nav nav-list bs-docs-sidenav affix">
+		          <!-- collaborators here -->
+		        </ul>
+		    </div>
+		    <div class="span10 resultData">
+		      	<div id="results" style="height: 100%">
+		      		<div id="singleCollaboratorPlot">
+			      		<div id="plot">
+			      			<span><h3>User Trend</h3></span>
+							<div id="plotOptionsTimeGranularity">
+								<span>Time Setting</span>								 
+								<label class="radio"> 
+									<input id="day" name="optionTimeGranularity" type="radio" onclick="javascript:onClickPlotOptionTimeGranularity(this);">Last Day
+								</label> 
+								<label class="radio">
+									<input id="week" name="optionTimeGranularity" type="radio" onclick="javascript:onClickPlotOptionTimeGranularity(this);">Last Week
+								</label> 
+								<label class="radio">
+									<input id="month" name="optionTimeGranularity" type="radio" onclick="javascript:onClickPlotOptionTimeGranularity(this);">Last Month
+								</label>
+								<label class="radio">
+									<input id="year" name="optionTimeGranularity" type="radio" onclick="javascript:onClickPlotOptionTimeGranularity(this);">Last Year
+								</label>
+								<label class="radio">
+									<input id="all" name="optionTimeGranularity" type="radio" checked="checked" onclick="javascript:onClickPlotOptionTimeGranularity(this);">All Time
+								</label>
+							</div>
+			      			<div id="singleCollaboratorPlotGraphics">
+			      				<!-- plot here -->			      				
+			      			</div>
+			      			<div id="noResultAlert">
+						      	<div class="alert alert-block alert-error">
+								  <h4>Warning!</h4>
+								  Sorry, no result for this time window.
+								</div>
+						    </div>
+			      			<div id="singleCollaboratorPlotOptions">
+								<div id="plotMoodOptionsRight">
+									<span>Right Axis</span>
+									<label class="checkbox"> 
+										<input id="productivity" name="rightAxis" type="checkbox" checked="checked" onclick="javascript:onClickPlotOptions(this)">Productivity
+									</label>
+									<label class="checkbox"> 
+										<input id="bug" name="rightAxis" type="checkbox" checked="checked" onclick="javascript:onClickPlotOptions(this)">Bug Fixing/Introduction
+									</label>
+								</div>
+								<div id="plotMoodOptionsLeft">
+									<span>Left Axis</span>
+									<div id="energyPolarity">
+										<label class="checkbox"> 
+											<input id="energy" type="checkbox" checked="checked" onclick="javascript:onClickPlotOptions(this)">Energy
+										</label>
+										<label class="checkbox"> 
+											<input id="polarity" type="checkbox" checked="checked" onclick="javascript:onClickPlotOptions(this)">Polarity
+										</label>
+									</div>
+									<div id="moodComponents">	
+										<label class="checkbox"> 
+											<input id="action" type="checkbox" checked="checked" onclick="javascript:onClickPlotOptions(this)">Action
+										</label> 
+										<label class="checkbox"> 
+											<input id="calm" type="checkbox" checked="checked" onclick="javascript:onClickPlotOptions(this)">Calm
+										</label> 
+										<label class="checkbox">
+											<input id="depression" type="checkbox" checked="checked" onclick="javascript:onClickPlotOptions(this)">Depression
+										</label> 
+										<label class="checkbox">
+											<input id="anxiety" type="checkbox" checked="checked" onclick="javascript:onClickPlotOptions(this)">Anxiety
+										</label>
+									</div>
+								</div>
+							</div>
+			      		</div>
+			      		<hr id="plotSeparator">
+				      	<div id="bubbles">
+				      		<span><h3>User Bubbles</h3></span>
+				      		<div id="bubbleOptionsTimeGranularity">
+								<span>Time Focus</span>								 
+								<label class="radio"> 
+									<input id="day" name="bubbleOptionsTimeGranularity" type="radio" onclick="javascript:onClickBubbleOptionTimeGranularity(this);">Day
+								</label> 
+								<label class="radio">
+									<input id="week" name="bubbleOptionsTimeGranularity" type="radio" onclick="javascript:onClickBubbleOptionTimeGranularity(this);">Week
+								</label> 
+								<label class="radio">
+									<input id="month" name="bubbleOptionsTimeGranularity" type="radio" onclick="javascript:onClickBubbleOptionTimeGranularity(this);">Month
+								</label>
+								<label class="radio">
+									<input id="year" name="bubbleOptionsTimeGranularity" type="radio" onclick="javascript:onClickBubbleOptionTimeGranularity(this);">Year
+								</label>
+								<label class="radio">
+									<input id="all" name="bubbleOptionsTimeGranularity" type="radio" onclick="javascript:onClickBubbleOptionTimeGranularity(this);">All time
+								</label>								
+							</div>
+				      		<div id="bubblesPlot">
+				      			<!-- plot here -->
+				      		</div>
+				      	</div>
+				    </div>
+				    <div id="overviewPlot">
+				    	<span><h3>Collaborators Trend</h3></span>
+				    	<div id="plotOverview" class="parcoords">
+						</div>
+				    	<span><h3>Parameters Table</h3></span>
+						<div id="gridOverview">
+						</div>
+			      	</div>
+					<div id="noMoodOverviewAlert">
+			      		<div class="alert alert-block alert-error">
+					  		<h4>Warning!</h4>
+					 		Sorry, no result with combined values for each collaborator. It is not possible to draw overview plot.
+						</div>
+					</div>
+			      	<div id="collaboratorAlert">
+			      		<div class="alert alert-block alert-error">
+						  <h4>Warning!</h4>
+						  Sorry, no commit by this collaborator.
+						</div>
+			      	</div>
+		      	</div>
+		    </div>
+		</div>
+	</div>
+	<div id="dark" class="dark"></div>
+	<div id="noProjectResultAlert" class="dark">
+		<div class="alert alert-block alert-error">
+		  <button type="button" class="close" onclick="onClickCloseNoResultAlert()">&times;</button>
+  		  <h4>Warning!</h4>
+		  No results for this project. Check the name and the owner.
+		</div>
+	</div>
+	<div id="noProjectCommitsAlert" class="dark">
+		<div class="alert alert-block">
+		  <button type="button" class="close" onclick="onClickCloseNoCommitsAlert()">&times;</button>
+  		  <h4>Warning!</h4>
+		  No commits for this project.
+		</div>
+	</div>
+</body>
+</html>
